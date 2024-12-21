@@ -83,6 +83,10 @@ Myneta Chat is a chat-based application designed to provide users with easy acce
 - Use the chat to inquire about various politicians' assets, liabilities, and other relevant information.
 - The system leverages advanced search and AI capabilities to provide accurate and relevant responses.
 
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/EVHxYbk9_EY/0.jpg)](https://www.youtube.com/watch?v=EVHxYbk9_EY&t=17s)
+
 ## Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.
