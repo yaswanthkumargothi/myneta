@@ -1,0 +1,20 @@
+SrNo,Description,Self,Spouse,HUF,Dependent1,Dependent2,Dependent3,TotalPrice
+i,Loans due to Individual / Entity,Nil,Nil,Nil,Nil,Nil,Nil,0
+ii,Any other Liability,Nil,Nil,Nil,Nil,Nil,Nil,0
+iii,Grand Total of Liabilities (as per affidavit),"6,99,838  6 Lacs+",Nil,Nil,Nil,Nil,Nil, 699838
+iv,Dues to departments dealing with government accommodation,Nil,Nil,Nil,Nil,Nil,Nil,0
+v,Dues to departments dealing with supply of water,Nil,Nil,Nil,Nil,Nil,Nil,0
+vi,Dues to departments dealing with supply of electricity,Nil,Nil,Nil,Nil,Nil,Nil,0
+vii,Dues to departments dealing with telephones,Nil,Nil,Nil,Nil,Nil,Nil,0
+viii,Dues to departments dealing with supply of transport,Nil,Nil,Nil,Nil,Nil,Nil,0
+ix,Income Tax Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+x,Wealth Tax Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+xi,Service Tax Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+xii,Property Tax Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+xiii,Sales Tax Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+xiv,GST Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+xv,Any Other Dues,Nil,Nil,Nil,Nil,Nil,Nil,0
+xvi,Grand Total of all Govt Dues (as per affidavit),Nil,Nil,Nil,Nil,Nil,Nil,0
+xvii,"Whether any other liabilities are in dispute, if so, mention the amount involved and the authority before which it is pending",Nil,Nil,Nil,Nil,Nil,Nil,0
+xviii,Totals (Calculated as Sum of Values),"Rs 6,99,838
+6 Lacs+",Nil,Nil,Nil,Nil,Nil, 699838

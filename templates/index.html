@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="mb-4 p-4 bg-gray-100 rounded-lg">
+            <h3 class="text-lg font-semibold mb-2">Database Query Help</h3>
+            <p class="text-sm text-gray-600">To query the database, start your message with "/query" followed by your question.</p>
+            <p class="text-sm text-gray-600">Example: /query Show all users</p>
+        </div>
+        <div id="chat-messages" class="h-96 overflow-y-auto mb-4 space-y-4">
+            <!-- Chat messages will be dynamically added here -->
+        </div>
+        <form id="message-form" class="flex space-x-2">
+            <input type="text" id="message-input" class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your message... (use /query for database questions)">
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                <i class="fas fa-paper-plane"></i> Send
+            </button>
+            <button type="button" onclick="refreshChat()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.getElementById('message-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('message-input');
+    const content = input.value.trim();
+    
+    if (!content) return;
+
+    const messagesDiv = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.className = 'message bg-blue-100 ml-12 p-3 rounded-lg';
+    
+    let messageContent = `
+        <div class="font-bold text-sm text-gray-600">{{ current_user.username }}</div>
+        <div class="message-content text-blue-800">${content}</div>
+        <div class="text-xs text-gray-500">${new Date().toLocaleString()}</div>
+    `;
+    
+    messageElement.innerHTML = messageContent;
+    messagesDiv.appendChild(messageElement);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    input.value = '';
+
+    const response = await fetch('/send_message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `content=${encodeURIComponent(content)}`
+    });
+
+    const data = await response.json();
+    
+    if (data.status === 'success') {
+        const responseElement = document.createElement('div');
+        responseElement.className = 'message bg-gray-100 mr-12 p-3 rounded-lg';
+        
+        let responseContent = `
+            <div class="font-bold text-sm text-gray-600">${data.message.username}</div>
+            <div class="message-content text-green-800">${data.message.content}</div>
+        `;
+        
+        if (data.message.is_query && data.message.query_result) {
+            responseContent += `
+                <div class="mt-2 p-2 bg-gray-50 rounded text-sm font-mono">
+                    <pre class="whitespace-pre-wrap">${data.message.query_result}</pre>
+                </div>
+            `;
+        }
+        
+        responseContent += `
+            <div class="text-xs text-gray-500">${data.message.timestamp}</div>
+        `;
+        
+        responseElement.innerHTML = responseContent;
+        messagesDiv.appendChild(responseElement);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+});
+
+function refreshChat() {
+    const messagesDiv = document.getElementById('chat-messages');
+    messagesDiv.innerHTML = '';
+}
+
+// Scroll to bottom on load
+window.onload = () => {
+    refreshChat();
+};
+</script>
+{% endblock %}

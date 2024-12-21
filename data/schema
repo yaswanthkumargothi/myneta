@@ -1,0 +1,111 @@
+-- Table for storing personal details
+CREATE TABLE PersonalDetails (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Constituency VARCHAR(255),
+    Age INT,
+    PartyCode VARCHAR(50),
+    CriminalCases INT,
+    NumberOfCases INT,
+    EducationLevel VARCHAR(255),
+    TotalAssets DECIMAL(18, 2),
+    TotalLiabilities DECIMAL(18, 2),
+    PANGiven CHAR(1)
+);
+
+-- Table for storing movable assets
+CREATE TABLE MovableAssets (
+    AssetID INT PRIMARY KEY,
+    SrNo INT,
+    Description VARCHAR(255),
+    Self DECIMAL(18, 2),
+    Spouse DECIMAL(18, 2),
+    HUF DECIMAL(18, 2),
+    Dependent1 DECIMAL(18, 2),
+    Dependent2 DECIMAL(18, 2),
+    Dependent3 DECIMAL(18, 2),
+    TotalPrice DECIMAL(18, 2),
+    PersonalDetailsID INT,
+    FOREIGN KEY (PersonalDetailsID) REFERENCES PersonalDetails(ID)
+);
+
+-- Table for storing immovable assets
+CREATE TABLE ImmovableAssets (
+    AssetID INT PRIMARY KEY,
+    SrNo INT,
+    Description VARCHAR(255),
+    Self DECIMAL(18, 2),
+    Spouse DECIMAL(18, 2),
+    HUF DECIMAL(18, 2),
+    Dependent1 DECIMAL(18, 2),
+    Dependent2 DECIMAL(18, 2),
+    Dependent3 DECIMAL(18, 2),
+    TotalPrice DECIMAL(18, 2),
+    PersonalDetailsID INT,
+    FOREIGN KEY (PersonalDetailsID) REFERENCES PersonalDetails(ID)
+);
+
+-- Table for storing liabilities
+CREATE TABLE Liabilities (
+    LiabilityID INT PRIMARY KEY,
+    SrNo INT,
+    Description VARCHAR(255),
+    Self DECIMAL(18, 2),
+    Spouse DECIMAL(18, 2),
+    HUF DECIMAL(18, 2),
+    Dependent1 DECIMAL(18, 2),
+    Dependent2 DECIMAL(18, 2),
+    Dependent3 DECIMAL(18, 2),
+    TotalPrice DECIMAL(18, 2),
+    PersonalDetailsID INT,
+    FOREIGN KEY (PersonalDetailsID) REFERENCES PersonalDetails(ID)
+);
+
+CREATE TABLE PersonalHistoricalDetails (
+    HistID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Constituency VARCHAR(255),
+    Age INT,
+    PartyCode VARCHAR(50),
+    CriminalCases INT,
+    NumberOfCases INT,
+    EducationLevel VARCHAR(255),
+    TotalAssets DECIMAL(18, 2),
+    TotalLiabilities DECIMAL(18, 2),
+    PANGiven CHAR(1),
+    PersonalDetailsID INT,
+    FOREIGN KEY (PersonalDetailsID) REFERENCES PersonalDetails(ID)
+);
+
+-- Schema already provided by you for table creation is correct and assumed to be executed.
+
+-- Now, let's insert data into the tables from the CSV files.
+-- Replace '/path/to/csvfile.csv' with the actual file path for each table.
+
+
+-- Insert data into PersonalDetails from the first row of PersonalHistoricalDetails CSV
+
+COPY PersonalDetails (ID, Name, Constituency, Age, PartyCode, CriminalCases, NumberOfCases, EducationLevel, TotalAssets, TotalLiabilities, PANGiven)
+FROM '/path/to/personal_historical_details/csvfile.csv'
+WITH (FORMAT csv, HEADER, DELIMITER ',', LIMIT 1);
+
+-- Insert data into MovableAssets
+COPY MovableAssets (AssetID, SrNo, Description, Self, Spouse, HUF, Dependent1, Dependent2, Dependent3, TotalPrice, PersonalDetailsID)
+FROM '/path/to/movable_assets/csvfile.csv'
+WITH (FORMAT csv, HEADER, DELIMITER ',');
+
+-- Insert data into ImmovableAssets
+COPY ImmovableAssets (AssetID, SrNo, Description, Self, Spouse, HUF, Dependent1, Dependent2, Dependent3, TotalPrice, PersonalDetailsID)
+FROM '/path/to/immovable_assets/csvfile.csv'
+WITH (FORMAT csv, HEADER, DELIMITER ',');
+
+-- Insert data into Liabilities
+COPY Liabilities (LiabilityID, SrNo, Description, Self, Spouse, HUF, Dependent1, Dependent2, Dependent3, TotalPrice, PersonalDetailsID)
+FROM '/path/to/liabilities/csvfile.csv'
+WITH (FORMAT csv, HEADER, DELIMITER ',');
+
+-- Insert data into PersonalHistoricalDetails
+COPY PersonalHistoricalDetails (HistID, Name, Constituency, Age, PartyCode, CriminalCases, NumberOfCases, EducationLevel, TotalAssets, TotalLiabilities, PANGiven, PersonalDetailsID)
+FROM '/path/to/personal_historical_details/csvfile.csv'
+WITH (FORMAT csv, HEADER, DELIMITER ',');
+
