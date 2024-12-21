@@ -1,2 +1,2 @@
-# electcorupt
-electors shifed parties in India and their networth growth 
+# MyNeta Chat
+
